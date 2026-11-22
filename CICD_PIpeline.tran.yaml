@@ -1,0 +1,50 @@
+type: "transformation"
+version: "1.0"
+pipeline:
+  components:
+    weather_daily_mapped:
+      type: "table-input"
+      parameters:
+        componentName: "weather_daily_mapped"
+        database: "[Environment Default]"
+        schema: "[Environment Default]"
+        targetTable: "weather_daily_mapped"
+        columnNames:
+        - "WEATHER_DATE"
+        - "TEMPERATURE_MEAN_C"
+        - "WEATHER_CODE"
+        - "SUNRISE"
+        - "SUNSET"
+        - "DAYLIGHT_SECONDS"
+        - "LATITUDE"
+        - "LONGITUDE"
+        - "WEATHER_DESCRIPTION"
+        metadataColumnNames:
+        timeOffset:
+    Create View:
+      type: "create-view"
+      sources:
+      - "weather_daily_mapped"
+      parameters:
+        componentName: "Create View"
+        database: "[Environment Default]"
+        schema: "[Environment Default]"
+        viewName: "cd_dpc"
+        secureView: "No"
+        viewType: "Standard"
+      postProcessing:
+        updateOutputMessage:
+        updateScalarVariables:
+        updateGridVariables:
+design:
+  components:
+    weather_daily_mapped:
+      position:
+        x: -440
+        "y": -40
+      tempMetlId:
+    Create View:
+      position:
+        x: -280
+        "y": -40
+      tempMetlId:
